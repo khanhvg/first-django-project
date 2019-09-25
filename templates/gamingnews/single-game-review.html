@@ -1,0 +1,101 @@
+{% extends "index.html" %}
+{% load staticfiles %}
+{% load humanize %}
+{% block title %}
+    <title>Game Detail</title>
+{% endblock %}
+
+{% block content %}
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="breadcrumb-area bg-img bg-overlay"
+         style="background-image: url({% static 'css_js' %}/img/bg-img/27.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <!-- Breadcrumb Text -->
+                <div class="col-12">
+                    <div class="breadcrumb-text">
+                        <h2>Game Review</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Single Game Review Area Start ##### -->
+    <section class="single-game-review-area section-padding-100">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- *** Review Area *** -->
+                <div class="col-12 col-md-6">
+                    <div class="single-game-review-area style-2 mt-70">
+                        {% if game %}
+                            <div class="game-content">
+                                <span class="game-tag">{{ game.category }}</span>
+                                <a href="single-game-review.html" class="game-title">{{ game.name }}</a>
+                                <div class="game-meta">
+                                    <a href="#" class="game-date">{{ game.updated_at }}</a>
+                                    <a href="#" class="game-price">{{ game.price }}$</a>
+                                </div>
+                                <p>{{ game.description }}</p>
+                                <!-- Download & Rating Area -->
+                                <div class="download-rating-area">
+                                    <div class="download-area">
+                                        <a href="#"><img src="img/core-img/app-store.png" alt=""></a>
+                                        <a href="#"><img src="img/core-img/google-play.png" alt=""></a>
+                                    </div>
+                                    <div class="rating-area mt-30">
+                                        <h3>{{ game.vote }}</h3>
+                                        <div class="stars">
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- *** Barfiller Area *** -->
+                <div class="col-12 col-md-6">
+                    <div class="egames-barfiller">
+                        <img src="{{ game.image.url }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="{% url 'cart:cart_add' game.id %}" method="post" style="
+    margin-left: 13%;
+">
+            {% csrf_token %}
+            <div class="form-inline">
+                <label style="
+    margin-bottom: 10px;
+">
+                    <input type="radio" name="Th_don_gia"
+                           value="{{ game.price }}" checked>
+                    Price: {{ game.price|intcomma }}$
+                </label>
+            </div>
+            <div class="post_text form-inline">
+                <input type="number" name="quantity" class="form-control" style="width: 90px; text-align:center"
+                       id="id_quantity">
+
+                <input type="submit" value="Add to cart" class="btn btn-success" style="
+    margin-left: 2%;
+">
+            </div>
+        </form>
+    </section>
+
+    <!-- ##### Single Game Review Area End ##### -->
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
+
+

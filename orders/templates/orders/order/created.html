@@ -1,0 +1,19 @@
+﻿{% extends "index.html" %}
+{% load i18n static %}
+{% load humanize %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3 class="page-header">Thank You For Shopping With Us
+                </h3>
+				{% autoescape off %}{{ order }}{% endautoescape %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
